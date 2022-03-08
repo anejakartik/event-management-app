@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>Booking History</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Event</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">No of Tickets</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Booked On</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for event in events.all %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>
+			<img src="{{ event.event.image.url }}" style="width: 130px;">
+            </td>
+            <td>{{ event.event.title }}</td>
+            <td>{{ event.event.price }}</td>
+            <td>
+            	{{ event.no_of_tickets }}
+            </td>
+            <td>
+              {{ event.total_price }}
+            </td>
+            <td>
+              {{ event.booked_date }}
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+			<td colspan="10"><b>No events booked yet</b></td>
+          </tr>
+        </tbody>
+        {% endfor %}
+       
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

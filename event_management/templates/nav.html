@@ -1,0 +1,95 @@
+{% load static %}
+
+
+<style>
+	.topbar {
+		background-color: white;
+		color: black !important;
+	}
+	.topbar a:hover{
+		color: black;
+	}
+</style>
+<!-- Header -->
+<header class="header1">
+		<!-- Header desktop -->
+		<div class="container-menu-header">
+			<div class="topbar">
+				<div class="topbar-social">
+					<a href="#" class="topbar-social-item fab fa-facebook"></a>
+					<a href="#" class="topbar-social-item fab fa-instagram"></a>
+					<a href="#" class="topbar-social-item fab fa-pinterest-p"></a>
+					<a href="#" class="topbar-social-item fab fa-twitter"></a>
+					<a href="#" class="topbar-social-item fab fa-youtube"></a>
+				</div>
+
+				<span class="topbar-child1">
+					Checkout The exciting events coming Your way 
+				</span>
+
+				<div class="topbar-child2">
+					<span class="topbar-email">
+						
+						{% if request.user.is_anonymous %}
+						<a href="https://github.com/anejakartik">
+						anejakartik68@gmail.com
+						{% else %}
+						<a href="https://github.com/anejakartik" style="text-transform: uppercase;">
+						
+						{{request.user}}
+						{% endif %}
+					    </a>
+					</span>
+
+					<div class="topbar-language rs1-select2">
+
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap_header">
+				<!-- Logo -->
+				<a href="/" class="logo">
+					<p style="color: black; "><b style="font-size: 22px;">E</b>vent Management</p>
+				</a>
+
+				<!-- Menu -->
+				<div class="wrap_menu">
+					<nav class="menu">
+						<ul class="main_menu">
+							<li>
+								<a href="/">Home</a>
+
+							</li>
+
+							<li>
+								<a href="/event">Events</a>
+							</li>
+
+							{% if request.user.is_authenticated %}
+							<li>
+								<a href="{% url 'account_logout' %}">Logout</a>
+							</li>
+							{% else %}
+							<li>
+								<a href="#">Login</a>
+								<ul class="sub_menu">
+									<li><a href="{% url 'account_login' %}">Login</a></li>
+									<li><a href="{% url 'account_signup' %}">SignUp</a></li>
+								</ul>
+							</li>
+							{% endif %}
+						</ul>
+					</nav>
+				</div>
+
+				<!-- Header Icon -->
+				<div class="header-icons">
+					<a href="/view-booked-events" class="header-wrapicon1 dis-block">
+						Booking History
+					</a>
+				</div>
+			</div>
+		</div>
+
+	</header>

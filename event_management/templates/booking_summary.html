@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>Order Summary</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Event</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Tickets</th>
+            <th scope="col">Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>
+			<img src="{{ events.image.url }}" style="width: 130px;">
+            </td>
+            <td>{{ events.title }}</td>
+            <td>{{ events.price }}</td>
+            <td>
+            	{{ quantity }}
+
+            </td>
+            <td>
+              {% widthratio events.price 1 quantity %}
+            </td>
+          </tr>
+
+        </tbody>
+        <tr>
+        	<td colspan="5"><b> Total : </b></td>
+        	<td><b>{% widthratio events.price 1 quantity %}</b></td>
+        </tr>
+        <tr>
+        	<td colspan="5">
+            <form name="complete_booking" method="post" action="{% url 'event:tickets_booked' %}">
+              {% csrf_token %}
+              <input type="hidden" name="event_id" value= {{events.id}}>
+              <input type="hidden" name="tickets" value= {{quantity}}>
+              <input type="submit" value="Complete Booking" id="cart1" class="btn btn-warning float-right ml-2" >
+        	</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+
